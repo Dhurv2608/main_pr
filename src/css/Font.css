@@ -1,0 +1,20 @@
+@font-face {
+    font-family: WorkSans-Regular;
+    src: url('/src/Font/WorkSans-Regular.ttf');
+}
+@font-face {
+    font-family: WorkSans-Bold;
+    src: url('/src/Font/WorkSans-Bold.ttf');
+}
+@font-face {
+    font-family:Fredoka_Cdensed-Lonight;
+    src: url('/src/Font/Fredoka_Condensed-Light.ttf');
+}
+@font-face {
+    font-family:Fredoka_Condensed-Regular;
+    src: url('/src/Font/Fredoka_Condensed-Regular.ttf');
+}
+@font-face {
+    font-family:Fredoka_Expanded-Bold;
+    src: url('/src/Font/Fredoka_Expanded-Bold.ttf');
+}
