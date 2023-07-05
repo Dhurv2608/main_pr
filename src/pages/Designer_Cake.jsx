@@ -39,14 +39,7 @@ const Designer_Cake = () => {
                 </div>
               </div>
             </div>
-
-
           </div>
-
-
-
-
-
         </div>
         <div className='col-9'></div>
       </div>
