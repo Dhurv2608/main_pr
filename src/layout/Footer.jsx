@@ -18,6 +18,7 @@ const Footer = () => {
       last: "Lovelace",
       born: 1996,
     });
+    
     setNewItem("");
 
   };

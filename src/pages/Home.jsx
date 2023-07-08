@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 const Home = () => {
-  const responsive = {
+  const Home = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
       items: 5
@@ -178,7 +178,7 @@ const Home = () => {
       </div>
 
       <div className='slider'>
-        <Carousel responsive={responsive}>
+        <Carousel responsive={Home}>
           <div className='img_margin  m-2' >
             <img src='image/sider_img_1.jpg' className='slider_img  mx-auto slide_1 mt-5' />
             <div className='overlay '>
@@ -541,7 +541,7 @@ const Home = () => {
         </div>
       </div>
       <div className='insta_slider'>
-        <Carousel responsive={responsive}>
+        <Carousel responsive={Home}>
           <div className='img_margin  m-2' >
             <img src='image/insta05.jpg' className='slider_img insta mx-auto slide_1 mt-5 insta_img' />
             <div className='overlay '>
@@ -588,7 +588,7 @@ const Home = () => {
         </Carousel>
       </div>
       <div className='compny_logo_slider mt-5 container'>
-      <Carousel responsive={responsive} className='logo_slider'>
+      <Carousel responsive={Home} className='logo_slider'>
                 <div className=''>
                     <img src="image/home-logo-1.png" className='' />
                 </div>

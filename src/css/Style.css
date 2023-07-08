@@ -753,6 +753,9 @@ a {
   letter-spacing: 0.6px;
   line-height: 14px;
 }
+.Availability{
+  border-bottom: 1px solid #f84747;
+}
 .accordion-item{
   border: 0px ;
 }
@@ -764,4 +767,90 @@ a {
 }
 .accordion .item .accordion-header button{
   background-color: transparent;
+}
+.contain_designer_cake{
+  border: 1px solid #f84747;
+  width: 100%;
+  padding: 20px 30px;
+  border-radius: 10px;
+}
+.Availability_title{
+  font-size: 24px;
+  line-height: 36px;
+  letter-spacing: 0.4px;
+}
+.menu_icon{
+  width: 22px;
+
+}
+.menu_style{
+  border:  1px solid #f84747;
+  display: inline;
+  padding: 6px;
+   border-radius: 6px;
+}
+.icon_width{
+  width: 26px;
+}
+.menu_text{
+  margin-top: 8px;
+}
+.price_p{
+  display: block !important;
+}
+.price_input{
+  width:110px;
+  margin: 6px ;
+  border-radius: 6px;
+  padding: 6px 10px;
+}
+.price{
+  align-items: center;
+}.border_top{
+  border-top: 1px solid #f84747;
+}
+.Add_title{
+  font-size: 18px;
+  line-height: 32.4px;
+  letter-spacing: 0.6px;
+}
+
+.react-multiple-carousel__arrow {
+  position: absolute;
+  outline: 0;
+  transition: all .5s;
+  border-radius: 35px;
+  z-index: 1000;
+  border: 0;
+  background: rgba(248,71,71,1.000) !important;
+  min-width: 43px;
+  min-height: 43px;
+  opacity: 1;
+  cursor: pointer;
+}
+.Add_icon{
+  font-size: 22px;
+}
+.new_arrivals{
+
+}
+.new_arrivals_title{
+  font-size: 12px;
+  line-height: 14.4px;
+  letter-spacing: 1.3px;
+  font-weight: 600;
+}
+.new_arrivals_subtitle{
+  font-size: 18px;
+  line-height: 23.4px;
+  letter-spacing: 0.6px;
+}
+.new_arrivals_price{
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 1px;
+font-family: WorkSans-Bold;
+}
+.star{
+  justify-content: center;
 }
