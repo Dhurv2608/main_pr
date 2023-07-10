@@ -18,22 +18,22 @@ const S_header = () => {
                                 </Link>
                             </li>
                             <li>
-                                <Link className='hi mx-2' >
+                                <Link to='/Birthday Cakes' className='hi mx-2' >
                                     Birthday cakes
                                 </Link>
                             </li>
                             <li>
-                                <Link className='hi mx-2' >
+                                <Link to='/Occasional Cakes' className='hi mx-2' >
                                     Occasional Cakes
                                 </Link>
                             </li>
                             <li>
-                                <Link className='hi mx-2' >
+                                <Link to='/Pastry Cakes' className='hi mx-2' >
                                     Pastry Cakes
                                 </Link>
                             </li>
                             <li>
-                                <Link className='hi animate-charcter mx-2' >
+                                <Link to='/New Ins' className='hi animate-charcter mx-2' >
                                     New Ins
                                 </Link>
                             </li>
