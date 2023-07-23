@@ -74,7 +74,17 @@ body {
   animation: textclip 2s linear infinite;
   font-size: 17px;
 }
-
+header .nav{
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 1s;
+  transform: translateY(-100vh);
+}
 ul {
   list-style: none;
   margin-top: 14.5px;
@@ -281,6 +291,9 @@ ul {
   font-weight: 600;
   line-height: 52px;
   letter-spacing: 0.6px;
+}
+.slide_bg{
+  margin-left: 121px;
 }
 
 .contain_p {
@@ -587,14 +600,30 @@ a {
 .overlay_slide_btn:hover{
    color: #000;
 }
-
+.cardimage{
+  width: 100%;
+}
 .card{
   border: none;
   margin-top: 20px !important;
   position: relative;
+  padding: 0;
+  width: 24%;
 }
 .card_img_top{
   margin-top: 26px;
+  width: 100%;
+}
+.iconlike[type="checkbox"] {
+	visibility: hidden;
+	&:checked + label {
+		transform: rotate(360deg);
+		background-color: #fff;
+		&:before {
+			transform: translateX(90px);
+			background-color: red;
+		}
+	}
 }
 .card_icon{
   position: absolute;
@@ -853,4 +882,27 @@ font-family: WorkSans-Bold;
 }
 .star{
   justify-content: center;
+}
+
+
+.heart {
+  width: 100px;
+  height: 100px;
+  background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat;
+  background-position: 0 0;
+  cursor: pointer;
+  transition: background-position 1s steps(28);
+  transition-duration: 0s;
+  
+  &.is-active {
+    transition-duration: 1s;
+    background-position: -2800px 0;
+  }
+}
+
+.placement {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

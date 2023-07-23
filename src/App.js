@@ -8,7 +8,7 @@ import Layout from './layout/Layout';
 import Designer_Cake from './pages/Designer_Cake';
 import Birthday_cake from './pages/Birthday_cake';
 import Occasional_Cake from './pages/Occasional_Cake';
-
+import '../src/css/Mediya.css'
 import S_layout from './layout/S_layout';
 import 'animate.css';
 import Pastry_Cake from './pages/Pastry_Cake';

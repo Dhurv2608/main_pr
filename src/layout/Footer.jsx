@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from 'react-router-dom'
 import { fireStoreDb } from "../firebaseConfig";
 import {
@@ -9,18 +9,30 @@ import {
   getDocs,
   setDoc,
 } from "firebase/firestore";
+
+
 const Footer = () => {
-  const [newItem, setNewItem] = useState('')
+  const [newItem, setNewItem] = useState("");
+  const isValidEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
   const handleCreate = async () => {
     // Add a new document in collection "cities"
-    await addDoc(collection(fireStoreDb, "users"), {
-      first: newItem,
-      last: "Lovelace",
-      born: 1996,
-    });
-    
-    setNewItem("");
-
+    if (newItem && newItem.match(isValidEmail)) {
+      await addDoc(collection(fireStoreDb, "users"), {
+        first: newItem,
+        last: "Lovelace",
+        born: 1996,
+      });
+      
+      setNewItem("");
+    }
+  };
+  const validateEmail = (e) => {
+    if (e.target?.value && e.target.value.match(isValidEmail)) {
+      newItem(false);
+      setNewItem(e.target.value);
+    } else {
+      newItem(true);
+    }
   };
   return (
     <div className='footer '>
@@ -50,7 +62,7 @@ const Footer = () => {
             <div className='col-4 p-0 text-center'>
               <img src='image/footer-logo.png' className='footer-logo' />
               <p className='text_formet text-light'>A party without cake is really just a meeting.</p>
-              <ul className='d-flex footermenus'>
+              <ul className='d-flex footermenus '>
                 <li className='text-light '><Link className=' footer_menu mx-2 ' to='/'>blog</Link>|</li>
                 <li className='text-light '><Link className=' footer_menu mx-2' to='/'>Home</Link>|</li>
                 <li className='text-light '><Link className=' footer_menu mx-2' to='/'>about</Link>|</li>
@@ -62,22 +74,7 @@ const Footer = () => {
               <h3 className='text-light mt-5 me-5 footer_header text-end'>News Letter</h3>
               <p className='text-end me-5 text-light'> Sign Up Our News Lette And Get An <br />Exclusive Offers</p>
               <div className="field " >
-                <input
-                  id="NewsletterForm--footer"
-                  type="email"
-                  name="contact[email]"
-                  className="field__input mt-3 "
-                  defaultValue=""
-                  aria-required="true"
-                  autoCorrect="off"
-                  autoCapitalize="off"
-                  autoComplete="email"
-                  placeholder="Email Address"
-                  required=""
-                  value={newItem}
-                  onChange={(e) => setNewItem(e.target.value)}
-
-                />
+                <input id="NewsletterForm--footer" type="email" required name="contact[email]" className="field__input mt-3 " defaultValue="" autoCorrect="off" autoCapitalize="off" autoComplete="email" placeholder="Email Address" value={newItem} onChange={(e) => setNewItem(e.target.value)} />
 
                 <button
                   type="submit"
@@ -105,9 +102,7 @@ const Footer = () => {
                         d="M4.112,10.214l-4.069,7.3a.326.326,0,0,0,.04.379.326.326,0,0,0,.371.089L22.2,9.31a.331.331,0,0,0,0-.614L.454.025A.325.325,0,0,0,.084.114a.326.326,0,0,0-.04.379l4.069,7.3,10.3,1.093c.079.008.138.058.138.118s-.058.11-.138.118Z"
                         transform="translate(0 -0.001)"
                         fill="currentcolor"
-                        fillRule="evenodd"
-
-                      />
+                        fillRule="evenodd" />
                     </g>
                   </svg>
                 </button>
@@ -124,7 +119,7 @@ const Footer = () => {
       </div>
 
     </div>
-    
+
   )
 }
 

@@ -1,8 +1,20 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  setDoc,
+} from "firebase/firestore";
+import { fireStoreDb } from "../firebaseConfig";
 const Home = () => {
+
+  const [data, setData] = useState([]);
+  const [datas, setDatas] = useState([]);
   const Home = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -18,13 +30,66 @@ const Home = () => {
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 3
+      items: 1
     }
   };
+
+  const fetchData = async () => {
+    const querySnapshot = await getDocs(collection(fireStoreDb, "product"));
+
+    const data = [];
+    querySnapshot.forEach((doc) => {
+      if (doc.data().name) {
+        data.push({ id: doc.pid, name: doc.data().name, price: doc.data().price, image: doc.data().img, deleteprice: doc.data().discountprice, des: doc.data().des, like: doc.data() });
+      }
+    });
+    setData(data);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const handleLike = async (data) => {
+    const datas = [];
+    const product = await getDocs(collection(fireStoreDb, "product"));
+    const likeproduct = await getDocs(collection(fireStoreDb, "likeproducts"));
+    likeproduct.forEach((doc) => {
+      if (doc.data().name) {
+        datas.push({ id: doc.lid, name: doc.data().name, price: doc.data().price, image: doc.data().img, deleteprice: doc.data().discountprice, des: doc.data().des, like: doc.data() });
+      }
+      setDatas(data);
+    });
+    console.log(data.id);
+    if (data.pid === datas.lid) {
+      const handleDelete = async (id) => {
+        await deleteDoc(doc(fireStoreDb, "likeproducts", id));
+        fetchData();
+        alert('product unlike');
+      };
+      handleDelete()
+    }
+    else {
+      
+      await addDoc(collection(fireStoreDb, 'likeproducts'), {
+        lid: data.pid,
+        name: data.name,
+        image: data.image,
+        price: data.price,
+        deleteprice: data.deleteprice,
+        des: data.des,
+        like: true
+      })
+      
+      alert('product like');
+    }
+  }
+
+
   return (
     <div>
       <div className='bg_img'>
-        <img src='image/bg.jpg' className='position-relative bg-img img-fluid' />
+        <img src='image/bg.jpg' className='position-relative bg-img img-fluid bg_img' />
         <div className='position-absolute banner_box'>
           <p className='banner_head text-light'>PARTY CAKES</p>
           <div className='banner_heading text-light'>
@@ -88,7 +153,7 @@ const Home = () => {
             <img src='image/slide_4.png' className='slide_bg  mx-auto slide_1 mt-5' />
 
           </div>
-          <div className='slide_info my-5  '>
+          <div className='slide_info mt-4  '>
             <h4 className='creamy'>Flavoured Cupcakes</h4>
             <p className='creamy_info'>Vestibulum rhoncus est<br /> pellentesque elit<br /> ullamcorper.
 
@@ -288,203 +353,42 @@ const Home = () => {
         <div className='cake_head'>Shop By Delicious Flavour</div>
         <div className='cake_p'>Commodo ullamcorper a lacus vestibulum sed arcu non. Cursus in hac habitasse platea dictumst. Odio <br />tempor orci dapibus ultrices in iaculis nunc sed. Quam viverra orci sagittis eu volutpat odio facilisis. </div>
       </div>
-      <div className="card-group m-5 mb-0">
-        <div className="card  m-2">
-          <div className='card_border'>
-            <img src="image/shop10.jpg" className="card-img-top card_img_top" />
-            <div className='card_icon animate__animated animate__fadeInDown'>
-              <i class="fa-regular fa-clone icon_border  card_icon_i"></i>
-              <br />
-              <i class="fa-regular fa-eye icon_border card_icon_i"></i>
-              <br />
-              <i class="fa-regular fa-heart icon_border card_icon_i"></i>
-            </div>
-            <div className='btn card_btn '>
-              Add to cart
-            </div>
-            <div className="card-body">
-              <h5 className="card-title mt-3">CAKEQUIPO</h5>
-              <p className="card-text card_text_style">
-                Chocolate Filling Donut Cake
-              </p>
-              <p className="card-text card_price">
-                $10.00 USD  <del className='ms-2'>$20.00 USD</del>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="card  m-2">
-          <div className='card_border'>
-            <img src="image/shop03.jpg" className="card-img-top card_img_top" />
-            <div className='card_icon animate__animated animate__fadeInDown'>
-              <i class="fa-regular fa-clone icon_border  card_icon_i"></i>
-              <br />
-              <i class="fa-regular fa-eye icon_border card_icon_i"></i>
-              <br />
-              <i class="fa-regular fa-heart icon_border card_icon_i"></i>
-            </div>
-            <div className='btn card_btn '>
-              Add to cart
-            </div>
-            <div className="card-body">
-              <h5 className="card-title mt-3">ACCENT</h5>
-              <p className="card-text card_text_style">
-                Fudge Filling Creamy Vanilla Cake
-              </p>
-              <p className="card-text card_price">
-                $13.00 USD
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="card  m-2">
-          <div className='card_border'>
-            <img src="image/shop17.jpg" className="card-img-top card_img_top" />
-            <div className='card_icon animate__animated animate__fadeInDown'>
-              <i class="fa-regular fa-clone icon_border  card_icon_i"></i>
-              <br />
-              <i class="fa-regular fa-eye icon_border card_icon_i"></i>
-              <br />
-              <i class="fa-regular fa-heart icon_border card_icon_i"></i>
-            </div>
-            <div className='btn card_btn '>
-              Add to cart
-            </div>
-            <div className="card-body">
-              <h5 className="card-title mt-3">TWILIGHT</h5>
-              <p className="card-text card_text_style">
-                Two Tier Strawberry Fruit Cake
-              </p>
-              <p className="card-text card_price">
-                $18.00 USD   <del className='ms-2'>$22.00 USD</del>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="card  m-2">
-          <div className='card_border'>
-            <img src="image/shop04.jpg" className="card-img-top card_img_top" />
-            <div className='card_icon animate__animated animate__fadeInDown'>
-              <i class="fa-regular fa-clone icon_border  card_icon_i"></i>
-              <br />
-              <i class="fa-regular fa-eye icon_border card_icon_i"></i>
-              <br />
-              <i class="fa-regular fa-heart icon_border card_icon_i"></i>
-            </div>
-            <div className='btn card_btn '>
-              Add to cart
-            </div>
-            <div className="card-body">
-              <h5 className="card-title mt-3">CRUMB</h5>
-              <p className="card-text card_text_style">
-                Strawberry Nuts Mousse Cake
-              </p>
-              <p className="card-text card_price">
-                $15.00 USD
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="card-group m-5 mt-0">
-        <div className="card  m-2">
-          <div className='card_border'>
-            <img src="image/shop11.jpg" className="card-img-top card_img_top" />
-            <div className='card_icon animate__animated animate__fadeInDown'>
-              <i class="fa-regular fa-clone icon_border  card_icon_i"></i>
-              <br />
-              <i class="fa-regular fa-eye icon_border card_icon_i"></i>
-              <br />
-              <i class="fa-regular fa-heart icon_border card_icon_i"></i>
-            </div>
-            <div className='btn card_btn '>
-              Add to cart
-            </div>
-            <div className="card-body">
-              <h5 className="card-title mt-3">TWILIGHT</h5>
-              <p className="card-text card_text_style">
-                Raspberry Velvet Fruit Fudge Cake
-              </p>
-              <p className="card-text card_price">
-                $55.00 USD
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="card  m-2">
-          <div className='card_border'>
-            <img src="image/shop16.jpg" className="card-img-top card_img_top" />
-            <div className='card_icon animate__animated animate__fadeInDown'>
-              <i class="fa-regular fa-clone icon_border  card_icon_i"></i>
-              <br />
-              <i class="fa-regular fa-eye icon_border card_icon_i"></i>
-              <br />
-              <i class="fa-regular fa-heart icon_border card_icon_i"></i>
-            </div>
-            <div className='btn card_btn '>
-              Add to cart
-            </div>
-            <div className="card-body">
-              <h5 className="card-title mt-3">FLAME</h5>
-              <p className="card-text card_text_style">
-                Vanilla Flavoure Berry Fruit Cake
-              </p>
-              <p className="card-text card_price">
-                $80.00 USD
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="card  m-2">
-          <div className='card_border'>
-            <img src="image/shop09.jpg" className="card-img-top card_img_top" />
-            <div className='card_icon animate__animated animate__fadeInDown'>
-              <i class="fa-regular fa-clone icon_border  card_icon_i"></i>
-              <br />
-              <i class="fa-regular fa-eye icon_border card_icon_i"></i>
-              <br />
-              <i class="fa-regular fa-heart icon_border card_icon_i"></i>
-            </div>
-            <div className='btn card_btn '>
-              Add to cart
-            </div>
-            <div className="card-body">
-              <h5 className="card-title mt-3">CHOP</h5>
-              <p className="card-text card_text_style">
-                Creamy Vanilla Layer Cupcake
-              </p>
-              <p className="card-text card_price">
-                $15.00 USD
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="card  m-2">
-          <div className='card_border'>
-            <img src="image/shop06.jpg" className="card-img-top card_img_top" />
-            <div className='card_icon animate__animated animate__fadeInDown'>
-              <i class="fa-regular fa-clone icon_border  card_icon_i"></i>
-              <br />
-              <i class="fa-regular fa-eye icon_border card_icon_i"></i>
-              <br />
-              <i class="fa-regular fa-heart icon_border card_icon_i"></i>
-            </div>
-            <div className='btn card_btn '>
-              Add to cart
-            </div>
-            <div className="card-body">
-              <h5 className="card-title mt-3">ACCENT</h5>
-              <p className="card-text card_text_style">
-                Red Velvet Ice Cream Cherry Cake
-              </p>
-              <p className="card-text card_price">
-                $20.00 USD  <del className='ms-2'>$30.00 USD</del>
+      <div className="card-group  mb-0">
 
-              </p>
+        <div className='row'>
+          {data.map((item) => (
+            <div className="card  ms-2 col-3  ">
+              <div className='card_border '>
+                <img className="card-img-top card_img_top cardimage " src={item.image} />
+                <div className='card_icon animate__animated animate__fadeInDown'>
+                  <i class="fa-regular fa-clone icon_border  card_icon_i"></i>
+                  <br />
+                  <i class="fa-regular fa-eye icon_border card_icon_i"></i>
+                  <br />
+
+                  <i class="fa-regular fa-heart icon_border card_icon_i" onClick={() => handleLike(item)} style={{ color: { data } === "unlike" ? "red" : "black" }}></i>
+
+                </div>
+                <div className='btn card_btn '>
+                  Add to cart
+                </div>
+                <div className="card-body">
+                  <h5 className="card-title mt-3">{item.name}</h5>
+                  <p className="card-text card_text_style">
+                    {item.des}
+                  </p>
+                  <p className="card-text card_price">
+                    {item.price}  <del className='ms-2'>{item.deleteprice}</del>
+                  </p>
+                </div>
+              </div>
             </div>
-          </div>
+          ))}
         </div>
+
+
       </div>
+
       <div className='container mt-5'>
         <div className='cake_contain'>OUR RECENT UPDATIONS</div>
         <div className='cake_head'>Delicious Cake Posts</div>
@@ -555,9 +459,9 @@ const Home = () => {
             <img src='image/insta04.jpg' className='slider_img  mx-auto slide_1 mt-5 insta_img' />
             <div className='overlay'>
               <div className='insta_date'>NOV 15</div>
+              <div className='overlay_head_slide'><i class="fa-brands fa-instagram insta_icon"></i></div>
               <div className='overlay_head_slide_p '>Turpis nunc eget <br />lorem dolor sed<br /> viverra ipsum.<br /> Malesuada fames ac<br /> turpis egestas sed<br /> tempus.
               </div>
-              <div className='overlay_head_slide'><i class="fa-brands fa-instagram insta_icon"></i></div>
             </div>
           </div>
           <div className='img_margin  m-2' >
@@ -588,23 +492,23 @@ const Home = () => {
         </Carousel>
       </div>
       <div className='compny_logo_slider mt-5 container'>
-      <Carousel responsive={Home} className='logo_slider'>
-                <div className=''>
-                    <img src="image/home-logo-1.png" className='' />
-                </div>
-                <div>
-                    <img src="image/home-logo-2.png" />
-                </div>
-                <div>
-                    <img src="image/home-logo-3.png" />
-                </div>
-                <div>
-                    <img src="image/brlog05.png" />
-                </div>
-                <div>
-                    <img src="image/brlog01.png" />
-                </div>
-            </Carousel>
+        <Carousel responsive={Home} className='logo_slider'>
+          <div className=''>
+            <img src="image/home-logo-1.png" className='' />
+          </div>
+          <div>
+            <img src="image/home-logo-2.png" />
+          </div>
+          <div>
+            <img src="image/home-logo-3.png" />
+          </div>
+          <div>
+            <img src="image/brlog05.png" />
+          </div>
+          <div>
+            <img src="image/brlog01.png" />
+          </div>
+        </Carousel>
       </div>
     </div>
 
