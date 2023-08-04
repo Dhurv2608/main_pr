@@ -44,10 +44,15 @@ const Header = () => {
                     </div>
                     <div className='d-flex ms-5 header_icon'>
                         <Link to='/cart'>
-                            <i class="fa-solid fa-cart-plus mx-2 " ></i>
+                            <i class="fa-solid fa-cart-plus mx-2  text-dark" ></i>
                         </Link>
-                        <i class="fa-regular fa-heart  mx-2 "> </i>
-                        <i class="fa-regular fa-user  mx-2"></i>
+                        <Link to='/heart'>
+                            <i class="fa-regular fa-heart  mx-2  text-dark"> </i>
+                        </Link>
+                        <Link to='/user'>
+                            <i class="fa-regular fa-user  mx-2 text-dark"></i>
+                        </Link>
+
                     </div>
                 </header>
             </div>

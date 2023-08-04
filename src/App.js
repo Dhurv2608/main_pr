@@ -13,6 +13,9 @@ import S_layout from './layout/S_layout';
 import 'animate.css';
 import Pastry_Cake from './pages/Pastry_Cake';
 import New_Ins from './pages/New_Ins';
+import Cart from './pages/Cart';
+import Heart from './pages/Heart';
+import User from './pages/User';
 function App() {
   return (
     <div className="App">
@@ -27,6 +30,10 @@ function App() {
                 <Route path='/Occasional Cakes' element={<Occasional_Cake />}/>
                 <Route path='/Pastry Cakes' element={<Pastry_Cake/>} />
                 <Route path='/New Ins' element={<New_Ins />} />
+                <Route path='/cart' element={<Cart />} />
+                <Route path='/heart' element={<Heart />} />
+                <Route path='/user' element={<User />} />
+                
               </Route>
             </Routes>
         </BrowserRouter>

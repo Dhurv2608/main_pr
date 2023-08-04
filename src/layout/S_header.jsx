@@ -40,9 +40,16 @@ const S_header = () => {
                         </ul>
                     </div>
                     <div className='d-flex  ms-5'>
-                        <i class="fa-solid fa-cart-plus mx-2 "></i>
-                        <i class="fa-regular fa-heart  mx-2 "> </i>
-                        <i class="fa-regular fa-user  mx-2"></i>
+                    <Link to='/cart'>
+                            <i class="fa-solid fa-cart-plus mx-2  text-dark" ></i>
+                        </Link>
+                        <Link to='/heart'>
+                        <i class="fa-regular fa-heart  mx-2  text-dark"> </i>
+                        </Link>
+                        <Link to='/user'>
+                        <i class="fa-regular fa-user  mx-2 text-dark"></i>
+
+                        </Link>
                     </div>
 
                 </header>

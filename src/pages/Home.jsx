@@ -9,12 +9,14 @@ import {
   doc,
   getDocs,
   setDoc,
+  updateDoc,
 } from "firebase/firestore";
 import { fireStoreDb } from "../firebaseConfig";
+import { update } from 'firebase/database';
 const Home = () => {
 
   const [data, setData] = useState([]);
-  const [datas, setDatas] = useState([]);
+
   const Home = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -36,11 +38,10 @@ const Home = () => {
 
   const fetchData = async () => {
     const querySnapshot = await getDocs(collection(fireStoreDb, "product"));
-
     const data = [];
     querySnapshot.forEach((doc) => {
       if (doc.data().name) {
-        data.push({ id: doc.pid, name: doc.data().name, price: doc.data().price, image: doc.data().img, deleteprice: doc.data().discountprice, des: doc.data().des, like: doc.data() });
+        data.push({ id: doc.id, name: doc.data().name, price: doc.data().price, image: doc.data().img, deleteprice: doc.data().discountprice, des: doc.data().des, like: doc.data().like || false ,quanitity : 1});
       }
     });
     setData(data);
@@ -50,42 +51,37 @@ const Home = () => {
     fetchData();
   }, []);
 
-  const handleLike = async (data) => {
-    const datas = [];
-    const product = await getDocs(collection(fireStoreDb, "product"));
-    const likeproduct = await getDocs(collection(fireStoreDb, "likeproducts"));
-    likeproduct.forEach((doc) => {
-      if (doc.data().name) {
-        datas.push({ id: doc.lid, name: doc.data().name, price: doc.data().price, image: doc.data().img, deleteprice: doc.data().discountprice, des: doc.data().des, like: doc.data() });
-      }
-      setDatas(data);
-    });
-    console.log(data.id);
-    if (data.pid === datas.lid) {
-      const handleDelete = async (id) => {
-        await deleteDoc(doc(fireStoreDb, "likeproducts", id));
-        fetchData();
-        alert('product unlike');
-      };
-      handleDelete()
+  const handleLike = async (id, like) => {
+    const productref = doc(collection(fireStoreDb, 'product'), id);
+    try {
+      await updateDoc(productref, { like });
+      setData((prevdata) =>
+        prevdata.map((item) =>
+          item.id == id ? { ...item, like } : item
+
+        )
+      )
     }
-    else {
-      
-      await addDoc(collection(fireStoreDb, 'likeproducts'), {
-        lid: data.pid,
-        name: data.name,
-        image: data.image,
-        price: data.price,
-        deleteprice: data.deleteprice,
-        des: data.des,
-        like: true
-      })
-      
-      alert('product like');
+    catch (error) {
+      console.log('like is not update', error);
     }
   }
-
-
+ 
+  const addcart = async (cart) => {
+   await addDoc(collection(fireStoreDb, "cart"), {
+        
+        name: cart.name,
+        des: cart.des,
+        price: cart.price,
+        discountprice:cart.deleteprice,
+        img:cart.image,
+        id:cart.id,
+        quanitity : 1
+        
+      });
+       
+  };
+  
   return (
     <div>
       <div className='bg_img'>
@@ -365,11 +361,12 @@ const Home = () => {
                   <br />
                   <i class="fa-regular fa-eye icon_border card_icon_i"></i>
                   <br />
-
-                  <i class="fa-regular fa-heart icon_border card_icon_i" onClick={() => handleLike(item)} style={{ color: { data } === "unlike" ? "red" : "black" }}></i>
+                  <button className='btn_like' onClick={() => handleLike(item.id, !item.like)} style={{ color: item.like ? "red" : "black" }}>
+                    <i class="fa-solid fa-heart icon_border card_icon_i"></i>
+                  </button>
 
                 </div>
-                <div className='btn card_btn '>
+                <div className='btn card_btn ' onClick={() => addcart(item)}>
                   Add to cart
                 </div>
                 <div className="card-body">
