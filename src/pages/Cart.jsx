@@ -30,13 +30,10 @@ const Cart = () => {
       }
     });
     setData(data);
-   
-   
-    
   };
   let newData = data.map(x => {
-    let Producttotal =   x.quanitity * Number(x.price)
-     return Producttotal 
+    let Producttotal = x.quanitity * Number(x.price)
+    return Producttotal
   })
   let total = newData.reduce((acc, curr) => {
     return acc + curr
@@ -54,8 +51,6 @@ const Cart = () => {
     );
   };
 
-
-
   useEffect(() => {
     fetchData();
   }, []);
@@ -64,7 +59,7 @@ const Cart = () => {
     await deleteDoc(doc(fireStoreDb, "cart", id));
     fetchData();
   };
-
+  const shiping = 10;
   return (
     <>
       <div className="pb-5">
@@ -200,11 +195,11 @@ const Cart = () => {
                 <ul className="list-unstyled mb-4">
                   <li className="d-flex justify-content-between py-3 border-bottom">
                     <strong className="text-muted">Order Subtotal </strong>
-                    <strong>$390.00</strong>
+                    <strong>${total}</strong>
                   </li>
                   <li className="d-flex justify-content-between py-3 border-bottom">
                     <strong className="text-muted">Shipping and handling</strong>
-                    <strong>$10.00</strong>
+                    <strong>${shiping}</strong>
                   </li>
                   <li className="d-flex justify-content-between py-3 border-bottom">
                     <strong className="text-muted">Tax</strong>
@@ -212,10 +207,10 @@ const Cart = () => {
                   </li>
                   <li className="d-flex justify-content-between py-3 border-bottom">
                     <strong className="text-muted">Total</strong>
-                    <h5 className="font-weight-bold">${total}</h5>
+                    <h5 className="font-weight-bold">${total + shiping} </h5>
                   </li>
                 </ul>
-                <a href="#" className="btn btn-dark rounded-pill py-2 btn-block">
+                <a href="" className="btn btn-dark rounded-pill py-2 btn-block">
                   Procceed to checkout
                 </a>
               </div>
@@ -223,10 +218,7 @@ const Cart = () => {
           </div>
         </div>
       </div>
-
-
     </>
-
   )
 }
 
