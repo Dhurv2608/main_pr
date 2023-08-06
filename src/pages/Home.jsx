@@ -41,15 +41,15 @@ const Home = () => {
     const data = [];
     querySnapshot.forEach((doc) => {
       if (doc.data().name) {
-        data.push({ id: doc.id, name: doc.data().name, price: doc.data().price, image: doc.data().img, deleteprice: doc.data().discountprice, des: doc.data().des, like: doc.data().like || false ,quanitity : 1 });
+        data.push({ id: doc.id, name: doc.data().name, price: doc.data().price, image: doc.data().img, deleteprice: doc.data().discountprice, des: doc.data().des, like: doc.data().like || false ,quanitity : 1  });
       }
     });
     setData(data);
   };
-  console.log(data);
   useEffect(() => {
     fetchData();
   }, []);
+  
 
   const handleLike = async (id, like) => {
     const productref = doc(collection(fireStoreDb, 'product'), id);

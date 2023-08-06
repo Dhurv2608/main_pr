@@ -19,18 +19,30 @@ const Cart = () => {
   const fetchData = async () => {
     const querySnapshot = await getDocs(collection(fireStoreDb, "cart"));
     const data = [];
-  
+
     querySnapshot.forEach((doc) => {
       if (doc.data().name) {
-        data.push({ id: doc.id, name: doc.data().name, price: doc.data().price, image: doc.data().img, deleteprice: doc.data().discountprice, des: doc.data().des, 
+        data.push({
+          id: doc.id, name: doc.data().name, price: doc.data().price, image: doc.data().img, deleteprice: doc.data().discountprice, des: doc.data().des,
           like: doc.data().like || false,
-          quanitity: doc.data().quanitity 
-          });
+          quanitity: doc.data().quanitity
+        });
       }
     });
     setData(data);
+   
+   
+    
   };
-  console.log(data);
+  let newData = data.map(x => {
+    let Producttotal =   x.quanitity * Number(x.price)
+     return Producttotal 
+  })
+  let total = newData.reduce((acc, curr) => {
+    return acc + curr
+  }, 0)
+  fetchData();
+  console.log(total);
 
   const updateCartQuantity = async (id, newQuantity) => {
     const productRef = doc(fireStoreDb, "cart", id);
@@ -41,8 +53,8 @@ const Cart = () => {
       prevData.map((item) => (item.id === id ? { ...item, quanitity: newQuantity } : item))
     );
   };
-  
-  
+
+
 
   useEffect(() => {
     fetchData();
@@ -111,7 +123,7 @@ const Cart = () => {
                         <td className="border-0 align-middle">
                           <strong>
                             <div className='d-flex'>
-                              <button className='quantity   border-0'  onClick={() => updateCartQuantity(item.id, item.quanitity - 1)}>-</button>
+                              <button className='quantity   border-0' onClick={() => updateCartQuantity(item.id, item.quanitity - 1)}>-</button>
 
                               <p className='my-2 mx-2' >{item.quanitity}</p>
                               <button className='quantity   border-0' onClick={() => updateCartQuantity(item.id, item.quanitity + 1)}>+</button>
@@ -200,7 +212,7 @@ const Cart = () => {
                   </li>
                   <li className="d-flex justify-content-between py-3 border-bottom">
                     <strong className="text-muted">Total</strong>
-                    <h5 className="font-weight-bold">$400</h5>
+                    <h5 className="font-weight-bold">${total}</h5>
                   </li>
                 </ul>
                 <a href="#" className="btn btn-dark rounded-pill py-2 btn-block">
