@@ -16,6 +16,7 @@ import New_Ins from './pages/New_Ins';
 import Cart from './pages/Cart';
 import Heart from './pages/Heart';
 import User from './pages/User';
+import Registration from './pages/Registration';
 function App() {
   return (
     <div className="App">
@@ -33,7 +34,9 @@ function App() {
                 <Route path='/cart' element={<Cart />} />
                 <Route path='/heart' element={<Heart />} />
                 <Route path='/user' element={<User />} />
-                
+                <Route path='/registration' element={<Registration />} />
+                <Route path='/login' element={<User />} />
+
               </Route>
             </Routes>
         </BrowserRouter>
