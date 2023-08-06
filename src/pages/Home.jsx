@@ -41,12 +41,12 @@ const Home = () => {
     const data = [];
     querySnapshot.forEach((doc) => {
       if (doc.data().name) {
-        data.push({ id: doc.id, name: doc.data().name, price: doc.data().price, image: doc.data().img, deleteprice: doc.data().discountprice, des: doc.data().des, like: doc.data().like || false ,quanitity : 1});
+        data.push({ id: doc.id, name: doc.data().name, price: doc.data().price, image: doc.data().img, deleteprice: doc.data().discountprice, des: doc.data().des, like: doc.data().like || false ,quanitity : 1 });
       }
     });
     setData(data);
   };
-
+  console.log(data);
   useEffect(() => {
     fetchData();
   }, []);
@@ -353,7 +353,7 @@ const Home = () => {
 
         <div className='row'>
           {data.map((item) => (
-            <div className="card  ms-2 col-3  ">
+            <div className="card desss_card m-2 col-3  ">
               <div className='card_border '>
                 <img className="card-img-top card_img_top cardimage " src={item.image} />
                 <div className='card_icon animate__animated animate__fadeInDown'>

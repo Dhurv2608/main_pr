@@ -603,6 +603,16 @@ a {
 .cardimage{
   width: 100%;
 }
+.car{
+  border: none;
+  margin-top: 40px !important;
+  margin-bottom: 0;
+  position: relative;
+  padding: 10px 10px 20px 10px;
+  width:94%;
+  
+
+}
 .card{
   border: none;
   margin-top: 20px !important;
@@ -637,6 +647,9 @@ a {
   opacity: 0%;
   transition: .6s;
 }
+.car:hover .card_icon_i{
+  opacity: 100%;
+}
 .card:hover .card_icon_i{
   opacity: 100%;
 
@@ -661,6 +674,10 @@ a {
   border: 1px solid #f84747;
 }
 .card:hover .card_btn{
+  opacity: 100%;
+
+}
+.car:hover .card_btn{
   opacity: 100%;
 
 }
@@ -896,4 +913,7 @@ font-family: WorkSans-Bold;
 }
 .quantity{
   background-color: #fff;
+}
+.desss_card{
+  width: 321px !important;
 }
