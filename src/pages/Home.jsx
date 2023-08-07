@@ -324,6 +324,7 @@ const Home = () => {
             <img src='image/Component_42_1.png' className=' icon_banner ' />
             Soft Baked Product
           </button>
+         
           <br />
           <button type="button" class="btn btn-outline-danger designer_btn my-5 shop_btn ms-3">
             shop now <i class="fa-solid fa-paper-plane"></i>

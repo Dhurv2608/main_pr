@@ -238,6 +238,8 @@ ul {
   color: #f84747;
   background-color: #fafafa;
   transition: 1s;
+  width: 40%;
+  margin-top: 0;
 
 }
 
@@ -455,16 +457,16 @@ a {
 .designer_cake_p {
   line-height: 28.8px;
   letter-spacing: 0.6px;
+  font-size: 16px;
 }
 
 .designer_btn {
   border-radius: 20px;
-  width: 80%;
+  width: 40%;
 }
 
 .icon_banner {
   width: 50px;
-
 }
 
 .designer_btn:hover .icon_banner {
@@ -642,6 +644,7 @@ a {
   right: 2%;
   font-size: 12PX;
   padding:6px ;
+  margin-top: 0;
   color: #f84747;
 }
 .card_icon_i{
@@ -806,6 +809,7 @@ a {
 .accordion-item{
   border: 0px ;
 }
+
 .accordion-button:focus{
   border: none;
   outline: none !important;
@@ -905,6 +909,7 @@ font-family: WorkSans-Bold;
   border: none;
   background-color: #fff;
   padding: 0;
+  margin-top: 0;
 }
 
 .input_quntity
