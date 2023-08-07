@@ -459,6 +459,7 @@ a {
 
 .designer_btn {
   border-radius: 20px;
+  width: 80%;
 }
 
 .icon_banner {
@@ -869,8 +870,8 @@ a {
   z-index: 1000;
   border: 0;
   background: rgba(248,71,71,1.000) !important;
-  min-width: 43px;
-  min-height: 43px;
+  width: 43px;
+  height: 49px;
   opacity: 1;
   cursor: pointer;
 }
