@@ -41,7 +41,7 @@ const Home = () => {
     const data = [];
     querySnapshot.forEach((doc) => {
       if (doc.data().name) {
-        data.push({ id: doc.id, name: doc.data().name, price: doc.data().price, image: doc.data().img, deleteprice: doc.data().discountprice, des: doc.data().des, like: doc.data().like || false, quanitity: 1 });
+        data.push({ id: doc.id, name: doc.data().name, price: doc.data().price, image: doc.data().img, deleteprice: doc.data().discountprice, des: doc.data().des, like: doc.data().like || false ,quanitity : 1  });
       }
     });
     setData(data);
@@ -49,7 +49,7 @@ const Home = () => {
   useEffect(() => {
     fetchData();
   }, []);
-
+  
 
   const handleLike = async (id, like) => {
     const productref = doc(collection(fireStoreDb, 'product'), id);
@@ -66,22 +66,22 @@ const Home = () => {
       console.log('like is not update', error);
     }
   }
-
+ 
   const addcart = async (cart) => {
-    await addDoc(collection(fireStoreDb, "cart"), {
-
-      name: cart.name,
-      des: cart.des,
-      price: cart.price,
-      discountprice: cart.deleteprice,
-      img: cart.image,
-      id: cart.id,
-      quanitity: 1
-
-    });
-
+   await addDoc(collection(fireStoreDb, "cart"), {
+        
+        name: cart.name,
+        des: cart.des,
+        price: cart.price,
+        discountprice:cart.deleteprice,
+        img:cart.image,
+        id:cart.id,
+        quanitity : 1
+        
+      });
+       
   };
-
+  
   return (
     <div>
       <div className='bg_img'>
@@ -320,14 +320,13 @@ const Home = () => {
           <button type="button" class="btn btn-outline-danger designer_btn  ms-3">
             <img src='image/wheat.png' className=' icon_banner ' />
             Fully Weat Product</button>
-          <button type="button" class="btn btn-outline-danger designer_btn   ms-3">
+          <button type="button" class="btn btn-outline-danger designer_btn my-2   ms-3">
             <img src='image/Component_42_1.png' className=' icon_banner ' />
             Soft Baked Product
           </button>
-         
           <br />
           <button type="button" class="btn btn-outline-danger designer_btn my-5 shop_btn ms-3">
-            shop now <i class="fa-solid fa-paper-plane"></i>
+shop now <i class="fa-solid fa-paper-plane"></i>
           </button>
         </div>
       </div>
