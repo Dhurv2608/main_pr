@@ -120,7 +120,7 @@ const Cart = () => {
                             <div className='d-flex'>
                               <button className='quantity   border-0' onClick={() => updateCartQuantity(item.id, item.quanitity - 1)}>-</button>
 
-                              <p className='my-2 mx-2 p' >{item.quanitity}</p>
+                              <p className='my-2 mx-2 ' >{item.quanitity}</p>
                               <button className='quantity   border-0' onClick={() => updateCartQuantity(item.id, item.quanitity + 1)}>+</button>
                             </div>
                           </strong>
