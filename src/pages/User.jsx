@@ -5,15 +5,29 @@ import { fireStoreDb } from "../firebaseConfig";
 import {
   addDoc,
   collection,
+  getDocs,
   
 } from "firebase/firestore";
 import Home from './Home';
 const User = () => {
   const [email, setemail] = useState("")
   const [password, setpassword] = useState("")
-  const handleCreate = async () => {
-    // Add a new document in collection "cities"
-    if (email) {
+  const [data, setdata] = useState('')
+  const fetchData = async () => {
+    const querySnapshot = await getDocs(collection(fireStoreDb, "register"));
+    const data = [];
+    querySnapshot.forEach((doc) => {
+      if (doc.data().name) {
+        data.push({ email:doc.data().email,password:doc.data().password });
+      }
+    });
+    setdata(data);
+  };
+  const handleCreate = async (event) => {
+    
+        // Add a new document in collection "cities"
+        event.preventDefault();
+        if (data.email==email && data.password==password) {
         await addDoc(collection(fireStoreDb, "login"), {
             email: email,
             password: password
@@ -55,7 +69,7 @@ const User = () => {
               />
             </div>
             <Link to='/'>
-            <button type="submit" > Submit</button>
+            <button className='button' type="submit" onClick={handleCreate()}> Submit</button>
 
             </Link>
             <div className="register">

@@ -420,7 +420,7 @@ h2 {
   text-shadow: 0 0 5px #cacaca; 
 }
 
-p {
+.p {
   margin-top: 18px;
   font-family: 'Montserrat', sans-serif;
   text-align: center;
@@ -447,7 +447,7 @@ input[type="password"] {
   border: 2px solid #535353;
 }
 
-button {
+.button {
   display: block;
   width: 100%;
   min-height: 50px;
@@ -458,10 +458,9 @@ button {
   border: none;
   border-radius: 1em;
   cursor: pointer;
-  box-shadow: 0 0 5px #fff; 
 }
 
-button:hover {
+.button:hover {
   color: rgb(223, 223, 223);
   box-shadow: 0 0 5px #fff; 
   animation: glowing 7s infinite;

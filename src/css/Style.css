@@ -462,7 +462,7 @@ a {
 
 .designer_btn {
   border-radius: 20px;
-  width: 40%;
+  width: 4.0%;
 }
 
 .icon_banner {
@@ -919,6 +919,8 @@ font-family: WorkSans-Bold;
 }
 .quantity{
   background-color: #fff;
+  color: #000;
+  margin: 0;
 }
 .desss_card{
   width: 321px !important;
